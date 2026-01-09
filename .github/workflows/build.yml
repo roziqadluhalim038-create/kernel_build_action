@@ -23,24 +23,21 @@ jobs:
           aosp-gcc: true
           aosp-clang: true
           ksu: true
-          ksu-version: main
+          ksu-other: true
+          ksu-url: https://github.com/KernelSU-Next/KernelSU-Next
+          ksu-version: next
           android-version: 12
           aosp-clang-version: r416183b
           disable-lto: true
           extra-cmd: |
-            scripts/config --file out/.config --set-str CONFIG_LOCALVERSION "-Zeta✦-Kernel"
+            scripts/config --file out/.config --set-str CONFIG_LOCALVERSION "-Zeta-Kernel"
             scripts/config --file out/.config --enable CONFIG_WQ_POWER_EFFICIENT_DEFAULT
             scripts/config --file out/.config --set-str CONFIG_DEFAULT_CPUFREQ_GOVERNOR "schedutil"
-            scripts/config --file out/.config --enable CONFIG_HZ_250
+            scripts/config --file out/.config --enable CONFIG_HZ_300
             scripts/config --file out/.config --enable CONFIG_SCHED_AUTOGROUP
-            scripts/config --file out/.config --disable CONFIG_SOFTLOCKUP_DETECTOR
-            scripts/config --file out/.config --disable CONFIG_HARDLOCKUP_DETECTOR
-            scripts/config --file out/.config --disable CONFIG_DETECT_HUNG_TASK
-            scripts/config --file out/.config --disable CONFIG_WQ_WATCHDOG
-            scripts/config --file out/.config --disable CONFIG_SCHED_DEBUG
-            scripts/config --file out/.config --disable CONFIG_SCHEDSTATS
             scripts/config --file out/.config --disable CONFIG_FTRACE
             scripts/config --file out/.config --disable CONFIG_TRACING
+            scripts/config --file out/.config --disable CONFIG_CONTEXT_SWITCH_TRACER
             scripts/config --file out/.config --disable CONFIG_DEBUG_KERNEL
             scripts/config --file out/.config --disable CONFIG_SLUB_DEBUG
             scripts/config --file out/.config --disable CONFIG_PANIC_ON_OOPS

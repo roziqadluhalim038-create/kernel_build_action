@@ -24,8 +24,9 @@ jobs:
           config: gki_defconfig
           arch: arm64
           android-version: 15
-          # Fixed: GCC is deprecated for Android 15. Set to false to bypass Exit 128.
-          aosp-gcc: false
+          # Fixed: Enable GCC to satisfy the action, but use the existing branch
+          aosp-gcc: true
+          aosp-gcc-version: android14-release
           aosp-clang: true
           aosp-clang-version: r522817
           ksu: true

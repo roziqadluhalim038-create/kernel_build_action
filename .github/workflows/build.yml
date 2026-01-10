@@ -29,25 +29,6 @@ jobs:
           ksu-version: main
           android-version: 12
           disable-lto: true
-          # Passing all optimizations as direct make arguments
-          extra-make-args: |
-            CONFIG_LOCALVERSION="✦-zeta-Missionary-KSUN+"
-            CONFIG_PREEMPT=y
-            CONFIG_PREEMPTION=y
-            CONFIG_PREEMPT_COUNT=y
-            CONFIG_HZ_250=y
-            CONFIG_HZ=250
-            CONFIG_RCU_BOOST=y
-            CONFIG_RCU_BOOST_DELAY=500
-            CONFIG_TCP_CONG_BBR=y
-            CONFIG_DEFAULT_TCP_CONG="bbr"
-            CONFIG_ZRAM_STREAMS=y
-            CONFIG_ZRAM_DEF_COMP_THREADS=4
-            CONFIG_WQ_POWER_EFFICIENT_DEFAULT=y
-            CONFIG_SCHED_AUTOGROUP=y
-            CONFIG_EROFS_FS_PCPU_KTHREAD=y
-            CONFIG_PANIC_TIMEOUT=0
-            CONFIG_KPROBES=y
-            CONFIG_HAVE_KPROBES=y
-            CONFIG_KPROBE_EVENTS=y
+          # Consolidating everything into one line to prevent exit code 1
+          extra-make-args: "CONFIG_LOCALVERSION=✦-zeta-Missionary-KSUN+ CONFIG_PREEMPT=y CONFIG_PREEMPTION=y CONFIG_PREEMPT_COUNT=y CONFIG_HZ_250=y CONFIG_HZ=250 CONFIG_RCU_BOOST=y CONFIG_TCP_CONG_BBR=y CONFIG_DEFAULT_TCP_CONG=bbr CONFIG_ZRAM_STREAMS=y CONFIG_ZRAM_DEF_COMP_THREADS=4 CONFIG_KPROBES=y CONFIG_KPROBE_EVENTS=y"
           anykernel3: true

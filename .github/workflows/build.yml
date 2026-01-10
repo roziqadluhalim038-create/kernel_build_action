@@ -1,6 +1,5 @@
 # A simple action usage
 name: Missionary-Zeta GKI
-name: Missionary-Zeta GKI
 on:
   workflow_dispatch:
 

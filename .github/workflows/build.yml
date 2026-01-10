@@ -29,21 +29,25 @@ jobs:
           ksu-version: main
           android-version: 12
           disable-lto: true
-          user-command: |
-            sed -i 's/CONFIG_PREEMPT_NONE=y/# CONFIG_PREEMPT_NONE is not set/' out/.config
-            sed -i 's/CONFIG_PREEMPT_VOLUNTARY=y/# CONFIG_PREEMPT_VOLUNTARY is not set/' out/.config
-            echo "CONFIG_PREEMPT=y" >> out/.config
-            echo "CONFIG_PREEMPTION=y" >> out/.config
-            echo "CONFIG_PREEMPT_COUNT=y" >> out/.config
-            scripts/config --file out/.config --disable CONFIG_DEBUG_PREEMPT
-            scripts/config --file out/.config --set-str CONFIG_LOCALVERSION "✦-zeta-Missionary-KSUN+"
-            scripts/config --file out/.config --enable CONFIG_RCU_BOOST
-            scripts/config --file out/.config --disable CONFIG_HZ_300
-            scripts/config --file out/.config --enable CONFIG_HZ_250
-            scripts/config --file out/.config --set-val CONFIG_HZ 250
-            scripts/config --file out/.config --enable CONFIG_TCP_CONG_BBR
-            scripts/config --file out/.config --set-str CONFIG_DEFAULT_TCP_CONG "bbr"
-            echo "CONFIG_KPROBES=y" >> out/.config
-            echo "CONFIG_HAVE_KPROBES=y" >> out/.config
-            echo "CONFIG_KPROBE_EVENTS=y" >> out/.config
+          # Passing all optimizations as direct make arguments
+          extra-make-args: |
+            CONFIG_LOCALVERSION="✦-zeta-Missionary-KSUN+"
+            CONFIG_PREEMPT=y
+            CONFIG_PREEMPTION=y
+            CONFIG_PREEMPT_COUNT=y
+            CONFIG_HZ_250=y
+            CONFIG_HZ=250
+            CONFIG_RCU_BOOST=y
+            CONFIG_RCU_BOOST_DELAY=500
+            CONFIG_TCP_CONG_BBR=y
+            CONFIG_DEFAULT_TCP_CONG="bbr"
+            CONFIG_ZRAM_STREAMS=y
+            CONFIG_ZRAM_DEF_COMP_THREADS=4
+            CONFIG_WQ_POWER_EFFICIENT_DEFAULT=y
+            CONFIG_SCHED_AUTOGROUP=y
+            CONFIG_EROFS_FS_PCPU_KTHREAD=y
+            CONFIG_PANIC_TIMEOUT=0
+            CONFIG_KPROBES=y
+            CONFIG_HAVE_KPROBES=y
+            CONFIG_KPROBE_EVENTS=y
           anykernel3: true

@@ -23,11 +23,11 @@ jobs:
           kernel-branch: mahiru-6-snowdrop-release
           config: gki_defconfig
           arch: arm64
-          android-version: 15
-          # Fixed: Enable GCC to satisfy the action, but use the existing branch
+          # Trick: Use 14 to get GCC binutils, but Clang 21 handles the rest
+          android-version: 14
           aosp-gcc: true
-          aosp-gcc-version: android14-release
           aosp-clang: true
+          # Manually set to the Android 15 Clang 21 build
           aosp-clang-version: r522817
           ksu: true
           ksu-version: master

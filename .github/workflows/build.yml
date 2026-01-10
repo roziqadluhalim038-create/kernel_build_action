@@ -30,11 +30,15 @@ jobs:
           aosp-clang-version: r416183b
           disable-lto: true
           extra-cmd: |
-            scripts/config --file out/.config --set-str CONFIG_LOCALVERSION "-Zeta-Kernel"
+            scripts/config --file out/.config --set-str CONFIG_LOCALVERSION "-✦Zeta-Missionary-KSUN+"
+            scripts/config --file out/.config --disable CONFIG_PREEMPT_NONE
+            scripts/config --file out/.config --disable CONFIG_PREEMPT_VOLUNTARY
+            scripts/config --file out/.config --enable CONFIG_PREEMPT
+            scripts/config --file out/.config --enable CONFIG_PREEMPTION
             scripts/config --file out/.config --enable CONFIG_RCU_BOOST
             scripts/config --file out/.config --set-val CONFIG_RCU_BOOST_DELAY 500
             scripts/config --file out/.config --set-str CONFIG_DEFAULT_CPUFREQ_GOVERNOR "schedutil"
-            scripts/config --file out/.config --enable CONFIG_HZ_300
+            scripts/config --file out/.config --enable CONFIG_HZ_250
             scripts/config --file out/.config --enable CONFIG_SCHED_AUTOGROUP
             scripts/config --file out/.config --enable CONFIG_WQ_POWER_EFFICIENT_DEFAULT
             scripts/config --file out/.config --enable CONFIG_TCP_CONG_BBR

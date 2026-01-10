@@ -1,4 +1,4 @@
-Name: Missionary-Zeta GKI
+name: Missionary-Zeta GKI
 on:
   workflow_dispatch:
 

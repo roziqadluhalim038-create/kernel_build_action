@@ -42,7 +42,7 @@ jobs:
         with:
           kernel-url: https://github.com/ramabondanp/android_kernel_common-5.10
           kernel-dir: common
-          kernel-branch: rama
+          kernel-branch: android_kernel_common-5.10
           config: gki_defconfig
           arch: arm64
           android-version: 15

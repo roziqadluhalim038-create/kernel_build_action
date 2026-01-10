@@ -25,7 +25,7 @@ jobs:
           ksu: true
           ksu-other: true
           ksu-url: https://github.com/KernelSU-Next/KernelSU-Next
-          ksu-version: next
+          ksu-version: main
           android-version: 12
           aosp-clang-version: r416183b
           disable-lto: true
@@ -33,19 +33,10 @@ jobs:
             scripts/config --file out/.config --set-str CONFIG_LOCALVERSION "-Zeta-Kernel"
             scripts/config --file out/.config --enable CONFIG_WQ_POWER_EFFICIENT_DEFAULT
             scripts/config --file out/.config --set-str CONFIG_DEFAULT_CPUFREQ_GOVERNOR "schedutil"
-            scripts/config --file out/.config --enable CONFIG_HZ_300
+            scripts/config --file out/.config --enable CONFIG_HZ_250
             scripts/config --file out/.config --enable CONFIG_SCHED_AUTOGROUP
-            scripts/config --file out/.config --disable CONFIG_FTRACE
-            scripts/config --file out/.config --disable CONFIG_TRACING
-            scripts/config --file out/.config --disable CONFIG_CONTEXT_SWITCH_TRACER
-            scripts/config --file out/.config --disable CONFIG_DEBUG_KERNEL
-            scripts/config --file out/.config --disable CONFIG_SLUB_DEBUG
-            scripts/config --file out/.config --disable CONFIG_PANIC_ON_OOPS
             scripts/config --file out/.config --set-val CONFIG_PANIC_TIMEOUT 0
-            scripts/config --file out/.config --disable CONFIG_KPROBES
-            scripts/config --file out/.config --disable CONFIG_AUDIT
             scripts/config --file out/.config --enable CONFIG_EROFS_FS_PCPU_KTHREAD
-            scripts/config --file out/.config --set-val CONFIG_EROFS_FS_CLUSTER_PAGE_LIMIT 1
             scripts/config --file out/.config --enable CONFIG_ZRAM_STREAMS
             scripts/config --file out/.config --set-val CONFIG_ZRAM_DEF_COMP_THREADS 4
           anykernel3: true

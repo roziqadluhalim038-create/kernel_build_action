@@ -31,7 +31,6 @@ jobs:
           disable-lto: true
           extra-cmd: |
             scripts/config --file out/.config --set-str CONFIG_LOCALVERSION "-Zeta-Kernel"
-            scripts/config --file out/.config --enable CONFIG_PREEMPT
             scripts/config --file out/.config --enable CONFIG_RCU_BOOST
             scripts/config --file out/.config --set-val CONFIG_RCU_BOOST_DELAY 500
             scripts/config --file out/.config --set-str CONFIG_DEFAULT_CPUFREQ_GOVERNOR "schedutil"

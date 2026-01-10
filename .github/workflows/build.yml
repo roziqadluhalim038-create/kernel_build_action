@@ -20,31 +20,34 @@ jobs:
           kernel-branch: android12-5.10
           config: gki_defconfig
           arch: arm64
-          aosp-gcc: true
+          aosp-gcc: false
           aosp-clang: true
+          aosp-clang-version: r416183b1
           ksu: true
           ksu-other: true
           ksu-url: https://github.com/KernelSU-Next/KernelSU-Next
           ksu-version: main
           android-version: 12
-          aosp-clang-version: r416183b
           disable-lto: true
           extra-cmd: |
-            scripts/config --file out/.config --set-str CONFIG_LOCALVERSION "-✦Zeta-Missionary-KSUN+"
-            scripts/config --file out/.config --disable CONFIG_PREEMPT_NONE
-            scripts/config --file out/.config --disable CONFIG_PREEMPT_VOLUNTARY
-            scripts/config --file out/.config --enable CONFIG_PREEMPT
-            scripts/config --file out/.config --enable CONFIG_PREEMPTION
+            sed -i 's/CONFIG_PREEMPT_NONE=y/# CONFIG_PREEMPT_NONE is not set/' out/.config
+            sed -i 's/CONFIG_PREEMPT_VOLUNTARY=y/# CONFIG_PREEMPT_VOLUNTARY is not set/' out/.config
+            echo "CONFIG_PREEMPT=y" >> out/.config
+            echo "CONFIG_PREEMPTION=y" >> out/.config
+            echo "CONFIG_PREEMPT_COUNT=y" >> out/.config
+            
+            
+            sed -i 's/CONFIG_LOCALVERSION=""/CONFIG_LOCALVERSION="-✦Zeta-Missionary-KSUN+"/' out/.config
+            
             scripts/config --file out/.config --enable CONFIG_RCU_BOOST
             scripts/config --file out/.config --set-val CONFIG_RCU_BOOST_DELAY 500
-            scripts/config --file out/.config --set-str CONFIG_DEFAULT_CPUFREQ_GOVERNOR "schedutil"
             scripts/config --file out/.config --enable CONFIG_HZ_250
-            scripts/config --file out/.config --enable CONFIG_SCHED_AUTOGROUP
-            scripts/config --file out/.config --enable CONFIG_WQ_POWER_EFFICIENT_DEFAULT
             scripts/config --file out/.config --enable CONFIG_TCP_CONG_BBR
             scripts/config --file out/.config --set-str CONFIG_DEFAULT_TCP_CONG "bbr"
             scripts/config --file out/.config --set-val CONFIG_PANIC_TIMEOUT 0
-            scripts/config --file out/.config --enable CONFIG_EROFS_FS_PCPU_KTHREAD
-            scripts/config --file out/.config --enable CONFIG_ZRAM_STREAMS
-            scripts/config --file out/.config --set-val CONFIG_ZRAM_DEF_COMP_THREADS 4
+            
+            # Ensure KernelSU-Next doesn't trip over missing symbols
+            echo "CONFIG_KPROBES=y" >> out/.config
+            echo "CONFIG_HAVE_KPROBES=y" >> out/.config
+            echo "CONFIG_KPROBE_EVENTS=y" >> out/.config
           anykernel3: true

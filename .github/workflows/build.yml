@@ -1,5 +1,6 @@
 # A simple action usage
 name: Missionary-Zeta GKI
+name: Missionary-Zeta GKI
 on:
   workflow_dispatch:
 
@@ -15,6 +16,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
+      - name: Build info
+        run: |
+          echo "--------------------------------------------------"
+          echo "Using AOSP Clang: r522817 (Clang 21)"
+          echo "AOSP GCC is disabled to avoid cloning missing branches"
+          echo "--------------------------------------------------"
+
       - name: Zeta ✦ Build
         uses: dabao1955/kernel_build_action@main
         with:
@@ -23,9 +31,9 @@ jobs:
           kernel-branch: mahiru-6-snowdrop-release
           config: gki_defconfig
           arch: arm64
-          # FIXED: '15' triggers the correct 'android15-release' path for Clang
+          # Keep android-version 15 for correct Clang path
           android-version: 15
-          aosp-gcc: true
+          aosp-gcc: false          # disabled to avoid missing 'android15-release' gcc branch
           aosp-clang: true
           # STABLE: The specific Clang 21 build for Android 15
           aosp-clang-version: r522817

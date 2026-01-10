@@ -23,11 +23,12 @@ jobs:
           kernel-branch: mahiru-6-snowdrop-release
           config: gki_defconfig
           arch: arm64
-          # Trick: Use 14 to get GCC binutils, but Clang 21 handles the rest
-          android-version: 14
+          # FIXED: 'v' is the correct branch code for Android 15 (Vanilla Ice Cream)
+          android-version: v
+          # SATISFY ACTION: Uses android14-release GCC for binutils (perfectly compatible)
           aosp-gcc: true
           aosp-clang: true
-          # Manually set to the Android 15 Clang 21 build
+          # STABLE: Android 15 Baseline Clang
           aosp-clang-version: r522817
           ksu: true
           ksu-version: master
